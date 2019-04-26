@@ -19,26 +19,9 @@ class RequestSignature
             );
     }
 
-    private function createBaseString(IlluminateRequest $request): string
-    {
-        return implode(':', $this->getSignatureData($request));
-    }
+    
 
-    private function getSignatureData(IlluminateRequest $request): array
-    {
-        $requestBody = $this->normalizeRequestBody($request->all());
+    
 
-        return [
-            self::SLACK_REQUEST_VERSION,
-            $request->header('X-Slack-Request-Timestamp'),
-            http_build_query($requestBody),
-        ];
-    }
-
-    private function normalizeRequestBody(array $requestBody): array
-    {
-        return array_map(function ($item) {
-            return $item === null ? '' : $item;
-        }, $requestBody);
-    }
+    
 }
